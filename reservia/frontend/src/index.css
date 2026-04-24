@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { @apply font-sans text-dark bg-sand-50; }
+  h1,h2,h3 { @apply font-display; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full bg-dark text-sand-50 font-medium 
+           transition-all duration-200 hover:bg-terracotta hover:-translate-y-0.5 hover:shadow-lg cursor-pointer;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-dark/20 text-dark 
+           font-medium transition-all duration-200 hover:border-dark hover:bg-dark hover:text-sand-50 cursor-pointer;
+  }
+  .btn-terracotta {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full bg-terracotta text-white 
+           font-medium transition-all duration-200 hover:bg-terracotta-700 cursor-pointer;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden;
+  }
+  .form-input {
+    @apply w-full px-4 py-3 rounded-xl border border-earth/30 bg-white outline-none
+           focus:border-earth font-sans text-dark placeholder-dark/30 transition-colors;
+  }
+  .form-label {
+    @apply block text-xs font-semibold tracking-widest uppercase text-earth mb-2;
+  }
+  .badge {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-semibold;
+  }
+}
