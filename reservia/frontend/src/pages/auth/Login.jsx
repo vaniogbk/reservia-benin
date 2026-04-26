@@ -11,11 +11,18 @@ export default function Login() {
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
 
+  const redirectByRole = (user) => {
+    if (user.role === 'super_admin')   return '/super-admin'
+    if (user.role === 'company_admin') return `/company/${user.company_id}/admin`
+    if (user.role === 'admin')         return '/admin'
+    return from === '/' ? '/' : from
+  }
+
   const onSubmit = async (data) => {
     try {
-      await login(data)
-      toast.success('Bienvenue !')
-      navigate(from, { replace: true })
+      const result = await login(data)
+      toast.success(`Bienvenue ${result.user.prenom} !`)
+      navigate(redirectByRole(result.user), { replace: true })
     } catch {
       toast.error('Email ou mot de passe incorrect')
     }
@@ -61,8 +68,11 @@ export default function Login() {
               </Link>
             </p>
           </div>
-          <div className="mt-4 p-3 bg-sand rounded-xl text-xs text-earth text-center">
-            <strong>Démo :</strong> admin@reservia-benin.com / password123
+          <div className="mt-4 p-3 bg-sand rounded-xl text-xs text-earth space-y-1">
+            <p className="font-semibold text-center mb-1">Comptes démo</p>
+            <p><span className="font-medium">Super Admin :</span> superadmin@reservia-benin.com / superadmin123</p>
+            <p><span className="font-medium">Admin entreprise :</span> company@reservia-benin.com / company123</p>
+            <p><span className="font-medium">Admin legacy :</span> admin@reservia-benin.com / password123</p>
           </div>
         </div>
       </div>
